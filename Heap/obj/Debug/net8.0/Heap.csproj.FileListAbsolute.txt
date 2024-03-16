@@ -1,0 +1,14 @@
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\obj\Debug\net8.0\Heap.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\obj\Debug\net8.0\Heap.AssemblyInfoInputs.cache
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\obj\Debug\net8.0\Heap.AssemblyInfo.cs
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\obj\Debug\net8.0\Heap.csproj.CoreCompileInputs.cache
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\bin\Debug\net8.0\Heap.exe
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\bin\Debug\net8.0\Heap.deps.json
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\bin\Debug\net8.0\Heap.runtimeconfig.json
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\bin\Debug\net8.0\Heap.dll
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\bin\Debug\net8.0\Heap.pdb
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\obj\Debug\net8.0\Heap.dll
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\obj\Debug\net8.0\refint\Heap.dll
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\obj\Debug\net8.0\Heap.pdb
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\obj\Debug\net8.0\Heap.genruntimeconfig.cache
+C:\Users\nguye\OneDrive\Máy tính\Data Structures And Algorithms\Heap\obj\Debug\net8.0\ref\Heap.dll
