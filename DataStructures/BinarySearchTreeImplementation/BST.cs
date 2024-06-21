@@ -1,6 +1,4 @@
-﻿using DataStructures.BinarySearchTreeImplementation;
-
-namespace DataStructures.BinarySearchTree
+﻿namespace DataStructures.BinarySearchTreeImplementation
 {
     public class BST
     {
@@ -89,9 +87,66 @@ namespace DataStructures.BinarySearchTree
             else prev.Right = node;
         }
 
+        private void ReplaceSubtree(TreeNode node1, TreeNode? node2)
+        {
+            if (node1.Parent == null) Root = node2;
+            else if (node1 == node1.Parent.Left) // if node1 is left child of its parent
+            {
+                node1.Parent.Left = node2;
+            }
+            else // if node1 is right child of its parent
+            {
+                node1.Parent.Right = node2;
+            }
+
+            if (node2 != null) node2.Parent = node1.Parent;
+        }
+
         public void Delete(TreeNode node)
         {
-            TreeNode? temp = Root;
+
+            if (node.Left == null) // Case 1: node has no left child (right child maybe null).
+            {
+                ReplaceSubtree(node, node.Right);
+            }
+            else if (node.Right == null) // Case 2: node has only one child and this child is its left child.
+            {
+                ReplaceSubtree(node, node.Left);
+            }
+            else // Case 3: node has both left child and right child.
+            {
+
+                TreeNode? successor = GetSuccessor(node);
+
+                // in this case, successor cannot be null
+                if (successor != null) // this check only helps avoid warnings
+                {
+                    // if successor is right child of node, then replace node by it
+                    if (successor.Parent == node)
+                    {
+                        ReplaceSubtree(node, successor);
+                        successor.Left = node.Left;
+                        successor.Left.Parent = successor;
+                    }
+                    else // if successor isn't right child of node
+                    {
+                        // and it's also not left child of node
+                        if (successor.Parent != node)
+                        {
+                            ReplaceSubtree(successor, successor.Right);
+                            successor.Right = node.Right;
+                            successor.Right.Parent = successor;
+
+                            // set successor to be child of node's parent
+                            ReplaceSubtree(node, successor);
+
+                            // set successor to be parent of the left child of node
+                            successor.Left = node.Left;
+                            successor.Left.Parent = successor;
+                        }
+                    }
+                }
+            }
         }
 
         private void InorderTravesalHelper(TreeNode? node, Action<TreeNode> action)

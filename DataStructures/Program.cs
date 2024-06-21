@@ -1,31 +1,45 @@
-﻿namespace DataStructures
+﻿
+
+using DataStructures.BinarySearchTreeImplementation;
+
+namespace DataStructures
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            BST<int> binarySearchTree = new BST<int>(new TreeNode<int>(10));
+            BST binarySearchTree = new BST(new TreeNode(10));
 
-            binarySearchTree.Insert(8);
-            binarySearchTree.Insert(5);
-            binarySearchTree.Insert(7);
+            binarySearchTree.Insert(new TreeNode(8));
+            binarySearchTree.Insert(new TreeNode(5));
+            binarySearchTree.Insert(new TreeNode(7));
 
-            binarySearchTree.Insert(16);
-            binarySearchTree.Insert(12);
-            binarySearchTree.Insert(15);
-            binarySearchTree.Insert(14);
-            binarySearchTree.Insert(11);
+            binarySearchTree.Insert(new TreeNode(18));
+            binarySearchTree.Insert(new TreeNode(12));
+            binarySearchTree.Insert(new TreeNode(15));
+            binarySearchTree.Insert(new TreeNode(14));
+            binarySearchTree.Insert(new TreeNode(11));
+            binarySearchTree.Insert(new TreeNode(6));
+            binarySearchTree.Insert(new TreeNode(17));
+            binarySearchTree.Insert(new TreeNode(16));
 
-            //var found = binarySearchTree.Find(8);
-
-            //if (found != null)
-            //{
-            //    Console.WriteLine(found.Value);
-            //}
-
+            Console.Write("Before deleting: ");
             binarySearchTree.InorderTravesal((node) =>
             {
-                Console.WriteLine(node.Key);
+                Console.Write($"{node.Key} ");
+            });
+            Console.WriteLine();
+
+            TreeNode? nodeToDelete = binarySearchTree.Find(12);
+            if (nodeToDelete != null)
+            {
+                binarySearchTree.Delete(nodeToDelete);
+            }
+
+            Console.Write("After deleting:  ");
+            binarySearchTree.InorderTravesal((node) =>
+            {
+                Console.Write($"{node.Key} ");
             });
         }
     }
