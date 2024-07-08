@@ -1,79 +1,81 @@
-﻿namespace DataStructures.BinarySearchTreeImplementation
+﻿using DataStructures.RedBlackTreeImplementation;
+
+namespace DataStructures.BinarySearchTreeImplementation
 {
     public class BST
     {
-        public TreeNode? Root { get; set; }
-        public BST(TreeNode? root = null)
+        public BSTTreeNode? Root { get; set; }
+        public BST(BSTTreeNode? root = null)
         {
             Root = root;
         }
 
-        private TreeNode GetMinNode(TreeNode subtreeRoot)
+        private BSTTreeNode GetMinNode(BSTTreeNode? subtreeRoot)
         {
-            while (subtreeRoot.Left != null)
+            while (subtreeRoot!.Left != null)
             {
-                subtreeRoot = subtreeRoot.Left;
+                subtreeRoot = subtreeRoot.Left as BSTTreeNode;
             }
 
             return subtreeRoot;
         }
-        private TreeNode GetMaxNode(TreeNode subtreeRoot)
+        private BSTTreeNode GetMaxNode(BSTTreeNode? subtreeRoot)
         {
-            while (subtreeRoot.Right != null)
+            while (subtreeRoot!.Right != null)
             {
-                subtreeRoot = subtreeRoot.Right;
+                subtreeRoot = subtreeRoot.Right as BSTTreeNode;
             }
 
             return subtreeRoot;
         }
 
-        private TreeNode? GetSuccessor(TreeNode node)
+        private BSTTreeNode? GetSuccessor(BSTTreeNode node)
         {
-            if (node.Right != null) return GetMinNode(node.Right);
+            if (node.Right != null) return GetMinNode(node.Right as BSTTreeNode);
 
-            TreeNode? accessor = node.Parent;
+            BSTTreeNode? accessor = node.Parent as BSTTreeNode;
             while (accessor != null && node == accessor.Right)
             {
                 node = accessor;
-                accessor = accessor.Parent;
+                accessor = accessor.Parent as BSTTreeNode;
             }
 
             return accessor;
         }
-        private TreeNode? GetPredecessor(TreeNode node)
+        private BSTTreeNode? GetPredecessor(BSTTreeNode node)
         {
-            if (node.Left != null) return GetMaxNode(node.Left);
+            if (node.Left != null) return GetMaxNode(node.Left as BSTTreeNode);
 
-            TreeNode? accessor = node.Parent;
+            BSTTreeNode? accessor = node.Parent as BSTTreeNode;
             while (accessor != null && node == accessor.Left)
             {
                 node = accessor;
-                accessor = accessor.Parent;
+                accessor = accessor.Parent as BSTTreeNode;
             }
 
             return accessor;
         }
-        public TreeNode? Find(int key)
+        public BSTTreeNode? Find(int key)
         {
-            TreeNode? temp = Root;
+            BSTTreeNode? temp = Root;
             while (temp != null && temp.Key != key)
             {
-                if (temp.Key > key) temp = temp.Left;
-                else temp = temp.Right;
+                if (temp.Key > key) temp = temp.Left as BSTTreeNode;
+                else temp = temp.Right as BSTTreeNode;
             }
 
             return temp;
         }
 
-        public void Insert(TreeNode node)
+        public void Insert(BSTTreeNode node)
         {
-            TreeNode? prev = null;
-            TreeNode? temp = Root;
+            BSTTreeNode? prev = null;
+            BSTTreeNode? temp = Root;
             while (temp != null)
             {
                 prev = temp;
-                if (temp.Key > node.Key) temp = temp.Left;
-                else if (temp.Key < node.Key) temp = temp.Right;
+                if (temp.Key > node.Key) temp = temp.Left as BSTTreeNode;
+                else if (temp.Key < node.Key) temp = temp.Right as BSTTreeNode;
                 else throw new Exception("Key duplicate exception.");
             }
 
@@ -87,7 +89,7 @@
             else prev.Right = node;
         }
 
-        private void ReplaceSubtree(TreeNode node1, TreeNode? node2)
+        private void ReplaceSubtree(BSTTreeNode node1, BSTTreeNode? node2)
         {
             if (node1.Parent == null) Root = node2;
             else if (node1 == node1.Parent.Left) // if node1 is left child of its parent
@@ -102,21 +104,21 @@
             if (node2 != null) node2.Parent = node1.Parent;
         }
 
-        public void Delete(TreeNode node)
+        public void Delete(BSTTreeNode node)
         {
 
             if (node.Left == null) // Case 1: node has no left child (right child maybe null).
             {
-                ReplaceSubtree(node, node.Right);
+                ReplaceSubtree(node, node.Right as BSTTreeNode);
             }
             else if (node.Right == null) // Case 2: node has only one child and this child is its left child.
             {
-                ReplaceSubtree(node, node.Left);
+                ReplaceSubtree(node, node.Left as BSTTreeNode);
             }
             else // Case 3: node has both left child and right child.
             {
 
-                TreeNode? successor = GetSuccessor(node);
+                BSTTreeNode? successor = GetSuccessor(node);
 
                 // in this case, successor cannot be null
                 if (successor != null) // this check only helps avoid warnings
@@ -133,7 +135,7 @@
                         // and it's also not left child of node
                         if (successor.Parent != node)
                         {
-                            ReplaceSubtree(successor, successor.Right);
+                            ReplaceSubtree(successor, successor.Right as BSTTreeNode);
                             successor.Right = node.Right;
                             successor.Right.Parent = successor;
 
@@ -149,17 +151,17 @@
             }
         }
 
-        private void InorderTravesalHelper(TreeNode? node, Action<TreeNode> action)
+        private void InorderTravesalHelper(BSTTreeNode? node, Action<BSTTreeNode> action)
         {
             if (node != null)
             {
-                InorderTravesalHelper(node.Left, action);
+                InorderTravesalHelper(node.Left as BSTTreeNode, action);
                 action(node);
-                InorderTravesalHelper(node.Right, action);
+                InorderTravesalHelper(node.Right as BSTTreeNode, action);
             }
 
         }
-        public void InorderTravesal(Action<TreeNode> action)
+        public void InorderTravesal(Action<BSTTreeNode> action)
         {
             InorderTravesalHelper(Root, action);
         }
